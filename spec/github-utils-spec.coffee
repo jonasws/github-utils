@@ -1,7 +1,5 @@
 {parseRepositoryInfoFromURL, getPullRequestURLs} = require '../lib/github-utils'
 
-
-
 describe 'module github-utils', ->
   describe 'function parseRepositoryInfoFromURL', ->
     it 'should parse the owner and name of a ssh-style repository url', ->

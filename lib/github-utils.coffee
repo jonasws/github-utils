@@ -4,7 +4,6 @@ Shell = require 'shell'
 GITHUB_ACCESS_TOKEN = process.env.GITHUB_ACCESS_TOKEN
 GITHUB_USERNAME = process.env.GITHUB_USERNAME
 
-
 github = new GitHubApi
   version: '3.0.0',
   host: 'api.github.com'

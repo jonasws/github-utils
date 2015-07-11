@@ -36,7 +36,7 @@ viewPullRequests = ->
         user: repoOwner
         repo: repoName
       , (err, pullRequests) ->
-        console.err err if err
+        return console.error err if err
         urls = getPullRequestURLs pullRequests, branch
         urls.forEach (url) ->
           Shell.openExternal url if url

@@ -15,14 +15,14 @@ authenticate = ->
     password: GITHUB_ACCESS_TOKEN
 
 getRepositories = ->
-  Promise.all(atom.project.getDirectories().map(atom.project.repositoryForDirectory.bind(atom.project)))
+  repositories = Promise.all atom.project.getDirectories().map(atom.project.repositoryForDirectory.bind(atom.project))
 
 parseRepositoryInfoFromURL = (url) ->
   matched = url.match /github\.com[:\/](.*?)(\.git)?$/
   [repoOwner, repoName] = matched[1].split('/') if matched
 
 getPullRequestURLs = (pullRequests, branch) ->
-  urls = pullRequests.filter((pr) -> pr.head.ref == branch).map((pr) -> pr.html_url)
+  urls = (pr.html_url for pr in pullRequests when pr.head.ref == branch)
 
 viewPullRequests = ->
   authenticate()
@@ -37,8 +37,7 @@ viewPullRequests = ->
       , (err, pullRequests) ->
         return console.error err if err
         urls = getPullRequestURLs pullRequests, branch
-        urls.forEach (url) ->
-          Shell.openExternal url if url
+        Shell.openExternal url for url in urls when url
 
 module.exports =
   activate : ->

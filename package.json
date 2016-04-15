@@ -6,7 +6,7 @@
   "repository": "https://github.com/jonasws/github-utils",
   "license": "MIT",
   "engines": {
-    "atom": ">=1.0.0 <2.0.0"
+    "atom": ">=1.6.0 <2.0.0"
   },
   "dependencies": {
     "github": "~0.2.4"

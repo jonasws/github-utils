@@ -1,6 +1,6 @@
 'use babel';
 
-import {parseRepositoryInfoFromURL, getPullRequestURLs} from '../lib/github-utils';
+import {parseRepositoryInfoFromURL, extractPullRequestURLs} from '../lib/github-utils';
 
 describe('module github-utils', () => {
   describe('function parseRepositoryInfoFromURL', () => {
@@ -36,8 +36,8 @@ describe('module github-utils', () => {
     });
   });
 
-  describe('function getPullRequestURLS', () => {
-    it('should return the HTML urls of the pull requests', () => {
+  describe('function extractPullRequestURLs', () => {
+    it('should return a Promise resolving with the HTML urls of the pull requests', (done) => {
       const examplePullRequests = [
         {
           html_url: 'https://someurl',
@@ -60,7 +60,10 @@ describe('module github-utils', () => {
       ];
       const expectedURLs = ['https://someurl', 'https://someotherurl'];
 
-      expect(getPullRequestURLs(examplePullRequests, 'master')).toEqual(expectedURLs);
+      extractPullRequestURLs(examplePullRequests, 'master').then((urls) => {
+        expect(urls).toEqual(expectedURLs);
+        done();
+      });
     });
   });
 });

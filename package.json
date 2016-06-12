@@ -1,7 +1,7 @@
 {
   "name": "github-utils",
   "main": "./lib/github-utils",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Use the GitHub API to view any pull request from your current git branch",
   "repository": "https://github.com/jonasws/github-utils",
   "license": "MIT",

@@ -43,26 +43,35 @@ describe('module github-utils', () => {
           html_url: 'https://someurl',
           head: {
             ref: 'master'
+          },
+          user: {
+            login: 'pikachu'
           }
         },
         {
           html_url: 'https://someotherurl',
           head: {
             ref: 'master'
+          },
+          user: {
+            login: 'pikachu'
           }
         },
         {
           html_url: 'https://urlnotreturned',
           head: {
             ref: 'feature-branch'
+          },
+          user: {
+            login: 'pikachu'
           }
         }
       ];
       const expectedURLs = ['https://someurl', 'https://someotherurl'];
 
-      extractPullRequestURLs(examplePullRequests, 'master').then((urls) => {
-        expect(urls).toEqual(expectedURLs);
-        done();
+      waitsForPromise(async () => {
+        const pullRequestURLs = await extractPullRequestURLs(examplePullRequests, 'master', 'pikachu');
+        expect(pullRequestURLs).toEqual(expectedURLs);
       });
     });
   });
